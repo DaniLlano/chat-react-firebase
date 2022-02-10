@@ -1,10 +1,10 @@
 import React, { useState, useRef } from 'react';
 
-import ChatMessage from './ChatMessage';
+import ChatMessage from '../ChatMessage';
 
 import firebase from 'firebase/compat/app';
 import { useCollectionData } from 'react-firebase-hooks/firestore'
-import { auth, firestore } from '../firebase';
+import { auth, firestore } from '../../firebase';
 
 function ChatRoom() {
 

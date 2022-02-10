@@ -1,4 +1,5 @@
 import React from 'react';
+import { GlobalStyles, Header, Section } from './styles/GlobalStyles'
 
 import SignIn from './components/SignIn';
 import SignOut from './components/SignOut';
