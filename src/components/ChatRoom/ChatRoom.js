@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { Main, Form, SendBtn, InputMsg } from "./ChatRoomStyles";
 
 import ChatMessage from '../ChatMessage';
 
@@ -36,17 +37,17 @@ function ChatRoom() {
   
     return (
       <>
-       <main>
+       <Main>
         {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg} />)}
        
         <div ref={dummy}></div>
-       </main>
+       </Main>
   
-       <form onSubmit={sendMessage}>
-          <input value={formValue} onChange={(e) => setFormValue(e.target.value)} />
+       <Form onSubmit={sendMessage}>
+          <InputMsg value={formValue} onChange={(e) => setFormValue(e.target.value)} />
   
-          <buton type="submit">Send</buton>
-       </form>
+          <SendBtn type="submit">Send</SendBtn>
+       </Form>
       </>
     )
   }
