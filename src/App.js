@@ -3,7 +3,7 @@ import { GlobalStyles, Header, Section } from './styles/GlobalStyles'
 
 import SignIn from './components/SignIn';
 import SignOut from './components/SignOut';
-import ChatRoom from './components/ChatRoom';
+import ChatRoom from './components/ChatRoom/ChatRoom';
 
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './firebase'
@@ -14,15 +14,17 @@ function App() {
   const [user] = useAuthState(auth);
 
   return (
-    <div className="App">
-      <header>
-        <SignOut />
-      </header>
+    <GlobalStyles>
+      <div className="App">
+        <Header>
+          <SignOut />
+        </Header>
 
-      <section>
-        {user ? <ChatRoom /> : <SignIn />}
-      </section>
-    </div>
+        <Section>
+          {user ? <ChatRoom /> : <SignIn />}
+        </Section>
+      </div>
+    </GlobalStyles>
   );
 }
 
