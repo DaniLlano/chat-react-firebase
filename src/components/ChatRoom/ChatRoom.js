@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Main, Form, SendBtn, InputMsg } from "./ChatRoomStyles";
 
-import ChatMessage from '../ChatMessage';
+import ChatMessage from '../ChatMessage/ChatMessage';
 
 import firebase from 'firebase/compat/app';
 import { useCollectionData } from 'react-firebase-hooks/firestore'
