@@ -24,3 +24,9 @@ justify-content: center;
 min-height: 100vh;
 background-color: #282535;
 `
+
+export const MainApp = styled.div`
+text-align: center;
+max-width: 728px;
+margin: 0 auto;
+`

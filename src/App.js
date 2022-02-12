@@ -1,6 +1,5 @@
 import React from 'react';
-import { GlobalStyles } from './styles/GlobalStyles'
-import { Header, Section } from './styles/Styles'
+import { Header, Section, MainApp } from './styles/Styles'
 
 import SignIn from './components/SignIn/SignIn';
 import SignOut from './components/SignOut/SignOut';
@@ -15,8 +14,7 @@ function App() {
   const [user] = useAuthState(auth);
 
   return (
-      <div className='App'>
-      <GlobalStyles />
+  <MainApp>
         <Header>
           <SignOut />
         </Header>
@@ -24,7 +22,8 @@ function App() {
         <Section>
           {user ? <ChatRoom /> : <SignIn />}
         </Section>
-      </div>
+      </MainApp>
+      
   );
 }
 

@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
 * {
@@ -10,12 +10,6 @@ export const GlobalStyles = createGlobalStyle`
 
 body {
     background-color: #282c34;
-}
-
-.App {
-    text-align: center;
-    max-width: 728px;
-    margin: 0 auto;
 }
 
 button {
