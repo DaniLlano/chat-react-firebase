@@ -23,9 +23,25 @@ flex-direction: column;
 export const Msg = styled.div`
 display: flex;
 align-items: center;
-padding: 20px 10px 0 20px;
-margin: 20px;
-border-radius: 15px;
-box-shadow: 0 0 10px rgb(164, 164, 164);
+max-width: 400px;
+margin-bottom: 12px;
+line-height: 24px;
+padding: 10px 20px;
+border-radius: 25px;
+position: relative;
+color: #fff;
+align-self: ${props => props.userClass && "flex-end"};
 background-color: ${props => props.userClass ? "#0b93f6" : "#e5e5ea"};
+flex-direction: ${props => props.userClass && "row-reverse"};
+`
+
+export const Text = styled.p`
+text-align: start;
+`
+
+export const Img = styled.img`
+width: 40px;
+height: 40px;
+border-radius: 50%;
+margin: 2px 5px;
 `

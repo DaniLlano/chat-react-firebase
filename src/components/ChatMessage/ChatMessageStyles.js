@@ -27,9 +27,3 @@ outline: none;
 border: none;
 padding: 0 10px;
 `
-export const Img = styled.img`
-width: 40px;
-height: 40px;
-border-radius: 50%;
-margin: 2px 5px;
-`

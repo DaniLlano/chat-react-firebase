@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { auth, firestore } from '../../firebase';
 
 import ChatMessage from '../ChatMessage/ChatMessage';
-import { Main, Msg} from "./ChatRoomStyles";
+import { Main, Msg, Img} from "./ChatRoomStyles";
 
 function ChatRoom() {
 
     const [messages, setMessages] = useState([])
 
+    const scroll = useRef()
+
     useEffect(() => {
-      firestore.collection('messages').orderBy('createdAt').limit(25).onSnapshot(snapshot => {
+      firestore.collection('messages').orderBy('createdAt').limitToLast(25).onSnapshot(snapshot => {
         setMessages(snapshot.docs.map(doc => doc.data()))
       })
     }, [])
@@ -19,12 +21,13 @@ function ChatRoom() {
         <Main>
           {messages.map(({id, text, photoURL, uid}) => (
             <Msg userClass={uid === auth.currentUser.uid && 'sent'} key={id}>
-              <img src={photoURL}></img>
+              <Img src={photoURL}></Img>
               <p>{text}</p>
             </Msg>
           ))}
         </Main>
-        <ChatMessage />
+        <ChatMessage scroll={scroll}/>
+        <div ref={scroll}></div>
       </>
     )
   }

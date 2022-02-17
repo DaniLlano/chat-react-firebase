@@ -1,35 +1,33 @@
 import React, { useState } from 'react';
 import firebase from 'firebase/compat/app';
 import { auth, firestore } from '../../firebase';
-import { Form, SendBtn, InputMsg  } from './ChatMessageStyles';
+import { Form, SendBtn, InputMsg } from './ChatMessageStyles';
 
-function ChatMessage() {
+function ChatMessage({scroll}) {
 
   const [msg, setMsg] = useState('')
 
-  const addMsg = async () => {
-    const { uid, photoURL } = auth.currentUser
+  const sendMessage = async (e) => {
+    e.preventDefault();
+
+    const { uid, photoURL } = auth.currentUser;
 
     await firestore.collection('messages').add({
       text: msg,
       photoURL,
       uid,
-      createdAt: firebase.firestore.FieldValue.serverTimeStamp()
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
     })
 
-    setMsg('')
-  }
-
-  const sendMessage = (e) => {
-    e.preventDefault();
-    addMsg()    
+    setMsg('');
+    scroll.current.scrollIntoView({ behavior: 'smooth' })
   }
   
     return (
-      <Form>
-          <InputMsg value={msg} onChange={e => setMsg(e.target.value)} />
+      <Form onSubmit={sendMessage}>
+          <InputMsg value={msg} onChange={(e) => setMsg(e.target.value)} />
   
-          <SendBtn type='submit' onClick={sendMessage}>Send</SendBtn>
+          <SendBtn type='submit' disabled={!msg}>Send</SendBtn>
         </Form>
     )
   }
