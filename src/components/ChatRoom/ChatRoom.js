@@ -1,53 +1,30 @@
-import React, { useState, useRef } from 'react';
-import { Main, Form, SendBtn, InputMsg } from "./ChatRoomStyles";
+import React, { useEffect, useState } from 'react';
+import { auth, firestore } from '../../firebase';
 
 import ChatMessage from '../ChatMessage/ChatMessage';
-
-import firebase from 'firebase/compat/app';
-import { useCollectionData } from 'react-firebase-hooks/firestore'
-import { auth, firestore } from '../../firebase';
+import { Main, Msg} from "./ChatRoomStyles";
 
 function ChatRoom() {
 
-    const dummy = useRef();
-  
-    const messagesRef = firestore.collection('messages');
-    const query = messagesRef.orderBy('createdAt').limitToLast(25)
-    
-    const [messages] = useCollectionData(query, {idField: 'id'});
-  
-    const [formValue, setFormValue] = useState('');
-  
-    const sendMessage = async (e) => {
-      e.preventDefault();
-  
-      const { uid, photoURL } = auth.currentUser;
-  
-      await messagesRef.add({
-        text: formValue,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-        uid,
-        photoURL
-      });
-  
-      setFormValue('');
-  
-      dummy.current.scrollIntoView({ behavior: 'smooth' });
-    }
+    const [messages, setMessages] = useState([])
+
+    useEffect(() => {
+      firestore.collection('messages').orderBy('createdAt').limit(25).onSnapshot(snapshot => {
+        setMessages(snapshot.docs.map(doc => doc.data()))
+      })
+    }, [])
   
     return (
       <>
         <Main>
-          {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg} />)}
-
-          <div ref={dummy}></div>
+          {messages.map(({id, text, photoURL, uid}) => (
+            <Msg userClass={uid === auth.currentUser.uid && 'sent'} key={id}>
+              <img src={photoURL}></img>
+              <p>{text}</p>
+            </Msg>
+          ))}
         </Main>
-  
-        <Form onSubmit={sendMessage}>
-          <InputMsg value={formValue} onChange={(e) => setFormValue(e.target.value)} />
-  
-          <SendBtn type="submit">Send</SendBtn>
-        </Form>
+        <ChatMessage />
       </>
     )
   }
