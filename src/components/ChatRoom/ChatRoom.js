@@ -25,9 +25,10 @@ function ChatRoom() {
               <Text>{text}</Text>
             </Msg>
           ))}
+          <span ref={scroll}></span>
         </Main>
         <ChatMessage scroll={scroll}/>
-        <span ref={scroll}></span>
+        
       </>
     )
   }
