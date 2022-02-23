@@ -29,7 +29,7 @@ line-height: 24px;
 padding: 10px 20px;
 border-radius: 25px;
 position: relative;
-color: #fff;
+color: ${props => props.userClass ? '#fff' : '#00000'};
 align-self: ${props => props.userClass && "flex-end"};
 background-color: ${props => props.userClass ? "#0b93f6" : "#e5e5ea"};
 flex-direction: ${props => props.userClass && "row-reverse"};
