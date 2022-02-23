@@ -19,7 +19,7 @@ function ChatRoom() {
     return (
       <>
         <Main>
-          {messages.map(({id, text, photoURL, uid}) => (
+          {messages.map(({id, text, photoURL, uid }) => (
             <Msg ref={scroll} userClass={uid === auth.currentUser.uid && 'sent'} key={id}>
               <Img src={photoURL}></Img>
               <Text>{text}</Text>
