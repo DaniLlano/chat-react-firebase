@@ -12,6 +12,8 @@ function ChatMessage({scroll}) {
 
     const { uid, photoURL } = auth.currentUser;
 
+    setMsg('');
+
     await firestore.collection('messages').add({
       text: msg,
       photoURL,
@@ -19,7 +21,6 @@ function ChatMessage({scroll}) {
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     })
 
-    setMsg('');
     scroll.current.scrollIntoView({ behavior: 'smooth' })
   }
   
